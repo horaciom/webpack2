@@ -1,4 +1,0 @@
-Standart web enviroment
-Applicacion Web con Webpack 2, Webpack dev server, ES6, eslint.
-npm install,
-npm start
