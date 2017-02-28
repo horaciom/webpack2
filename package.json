@@ -1,14 +1,14 @@
 {
-  "name": "webpack-2-demo",
+  "name": "webpack-2-seed",
   "version": "1.0.0",
-  "description": "",
+  "description": "Starter app",
   "main": "index.js",
   "scripts": {
     "build": "webpack --watch --colors",
     "start": "webpack-dev-server --progress --colors --open"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["javascript","ES6","Webpack 2", "EsLint"],
+  "author": "https://github.com/horaciom/",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.23.0",
