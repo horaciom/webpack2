@@ -7,15 +7,25 @@
     "build": "webpack --watch --colors",
     "start": "webpack-dev-server --progress --colors --open"
   },
-  "keywords": ["javascript","ES6","Webpack 2", "EsLint"],
+  "keywords": [
+    "javascript",
+    "ES6",
+    "Webpack 2",
+    "EsLint"
+  ],
   "author": "https://github.com/horaciom/",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
+    "css-loader": "^0.26.2",
     "eslint": "^3.16.1",
     "eslint-loader": "^1.6.3",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   }
