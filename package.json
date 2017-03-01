@@ -11,7 +11,8 @@
     "javascript",
     "ES6",
     "Webpack 2",
-    "EsLint"
+    "EsLint",
+    "Sass"
   ],
   "author": "https://github.com/horaciom/",
   "license": "ISC",
