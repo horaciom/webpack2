@@ -4,7 +4,7 @@
   "description": "Starter app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --watch --colors",
+    "build": "webpack --progress --colors",
     "start": "webpack-dev-server --progress --colors --open"
   },
   "keywords": [
@@ -32,8 +32,5 @@
     "style-loader": "^0.13.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.4"
   }
 }

@@ -1,19 +1,22 @@
+/*node warnings false*/
 process.noDeprecation = true
 
-const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const webpack = require("webpack");
-const package = require('./package.json');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+/*require node_modules*/
+const path                           = require("path");
+const ExtractTextPlugin              = require("extract-text-webpack-plugin");
+const webpack                        = require("webpack");
+const package                        = require('./package.json');
+const HtmlWebpackPlugin              = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
-const extractSass = new ExtractTextPlugin({ filename: "bundle.css", allChunks: true });
+const CleanWebpackPlugin             = require('clean-webpack-plugin');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+/*check if have dependencies*/
 let checkDependencies = () => !!(package && package.dependencies);
 
+/*retrive entry obj if dependencies exist or not*/
 let retriveEntry = () => {
-    const entry = {
+    let entry = {};
+    entry = {
         app: [
             path.resolve(__dirname, 'src') + '/index.js',
             //needed to resolve issue with ExtractTextPlugin
@@ -23,22 +26,16 @@ let retriveEntry = () => {
     if (checkDependencies()) entry.vendor = Object.keys(package.dependencies);
     return entry;
 }
-
+/*retrive plugins array if dependencies exist or not*/
 let retrivePlugins = () => {
-    const plugins = [extractSass];
-    const generateVendors = new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' });
+    let plugins = [];
+    const generateCleanUp = new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname) });
+    const extractSass = new ExtractTextPlugin({ filename: "bundle.css", allChunks: true });
     const generateHTML = new HtmlWebpackPlugin();
+    const generateVendors = new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' });
     const generateCSS = new HtmlWebpackIncludeAssetsPlugin({ assets: ['bundle.css'], append: false });
+    plugins = [generateCleanUp, extractSass, generateHTML, generateCSS];
     if (checkDependencies()) plugins.push(generateVendors);
-    plugins.push(new CleanWebpackPlugin(['dist', 'build'], {
-        root: path.resolve(__dirname),
-        verbose: true,
-        dry: false,
-        exclude: ['shared.js']
-    }));
-    plugins.push(generateHTML);
-    plugins.push(generateCSS);
-    plugins.push(generateCSS);
     return plugins;
 }
 
@@ -50,7 +47,7 @@ module.exports = {
         publicPath: 'http://localhost:3030'
     },
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js','.sass','.css']
     },
     devServer: {
         host: 'localhost',
@@ -72,7 +69,7 @@ module.exports = {
                 exclude: '/node_modules/',
                 query: {
                     presets: ['es2015'],
-                    compact: false
+                    compact: true
                 }
             },
             {
